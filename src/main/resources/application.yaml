@@ -1,0 +1,81 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    url: ${UAS_URL:jdbc:postgresql://10.36.210.179:5433/uasdev?prepareThreshold=0}
+    username: ${UAS_DB_USER:}
+    password: ${UAS_DB_PASSWORD:}
+    driver-class-name: org.postgresql.Driver
+
+
+auth:
+  login: ${AUTH_LOGIN:}
+  pass: ${PASS:!}
+  token:
+    confluence: ${CONF_TOKEN:}
+    jira: ${JIRA_TOKEN:}
+    bb: ${BB_TOKEN:}
+
+
+agent:
+  host: ${AGENT_HOST:http://localhost:8080}
+
+
+connection:
+  bb: ${BB_HOST:https://stash.delta.sbrf.ru}
+  jira: ${JIRA_HOST:https://jira.delta.sbrf.ru}
+  conf: ${CONF_HOST:https://confluence.delta.sbrf.ru}
+
+# Длительность периода в милисекундах, через который происходит сверка
+verification-delay: 1000000
+# Длительность периода в месяцах, за который происходит сверка
+vrification-mounth-duration: 1
+
+# Матрица сверки. Ключ - количество багов, оцененное Gigachat. Значение - объект с минимальным и максимальным ожидаемым значением.
+# Данная конфигурация сверки является строгой без погрешности сверки
+verification:
+  matrix:
+    0:
+      min: 0
+      max: 0
+    1:
+      min: 1
+      max: 1
+    2:
+      min: 2
+      max: 2
+    3:
+      min: 3
+      max: 3
+    4:
+      min: 4
+      max: 4
+    5:
+      min: 5
+
+
+# Матрица сверки. Ключ - значение, оцененное Gigachat. Значение - объект с минимальным и максимальным ожидаемым значением.
+# Данная конфигурация сверки является мягкой с погрешностью сверки
+#verification:
+#  matrix:
+#    0:
+#      min: 0
+#      max: 1
+#    1:
+#      min: 1
+#      max: 2
+#    2:
+#      min: 2
+#      max: 3
+#    3:
+#      min: 3
+#      max: 4
+#    4:
+#      min: 4
+#      max: 5
+#    5:
+#      min: 5
+
+
+# Включить автоматический анализ задач из файла data_for_analise.json
+auto-analyze: false
